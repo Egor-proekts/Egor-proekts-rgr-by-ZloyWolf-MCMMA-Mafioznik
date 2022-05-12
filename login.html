@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/script2.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/f54fd41071.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="img/logoTGK.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>ТГК</title>
+</head>
+<body>
+<div id="index"></div>
+<nav class="navbar navbar-expand-lg navbar-light" style="border-bottom: 1px solid #E1E1E1;">
+    <div class="container">
+        <a href="/" class="navbar-brand">
+            <img src="img/logoTGK2.png" width="101px" height="100px" alt="logo">
+        </a>
+        <p id="phonenumber">+7(905)-325-62-50 <br> <a href="mailto:tgk.ooo@mail.ru"
+                                                      style="color: #17A2B8;font-size: 24px; ">tgk.ooo@mail.ru</a></p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expended="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto nav-icon">
+                <li class="nav-item active">
+                    <a href="index.html" class="nav-link"><i class="fa fa-home"></i>Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link"><i class="fa fa-info"
+                                                         style="padding-right: 14px; padding-left: 6px;"></i>О компании</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link"><i class="fa fa-server"></i>Услуги</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contacts.html" class="nav-link"><i class="fa fa-map-marker"></i>Контакты</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                    <a href="reg.html" class="nav-link"><i class="fa"></i>Регистрация</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="regFormOuter" style="margin: 0px; padding: 0px;">
+
+    <h3 style="margin: 30px 0 30px 0;">Форма входа пользователя</h3>
+
+    <form method="POST" action="/login" id="regForm">
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="Ваша адрес" class="inputClass" required>
+        <label for="password">Пароль: </label>
+        <input type="password" name="password" id="password" placeholder="***" class="inputClass" required>
+        <input style="align-self: center;" type="submit" value="Вход">
+        <div th:if="${param.error}" style="align-self: center;margin: 20px;" class="alert alert-danger">
+            Неверные данные или неактивированный аккаунт
+        </div>
+    </form>
+</div>
+
+        <footer class="page-footer font-small unique-color-dark pt-0">
+            <div class="info-color">
+                <div class="container">
+                    <div class="row py-4 d-flex align-items-center">
+                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                            <h6 class="mb-0 white-text">ООО "ТГК" Адрес: 410004, г. Саратов, ул. 2 Садовая, д. 9Б, литер
+                                В, оф. 4.</h6>
+                        </div>
+                        <div class="col-md-6 col-lg-7 text-center text-md-right icon-footer-font">
+                            <a href="mailto:tgk.ooo@mail.ru" class="fb-ic ml-0">
+                                <i class="fa fa-at white-text mr-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <button id="top"><i class="fa fa-chevron-up"></i></button>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
+        <script src="js/main.js"></script>
+</body>
+</html>

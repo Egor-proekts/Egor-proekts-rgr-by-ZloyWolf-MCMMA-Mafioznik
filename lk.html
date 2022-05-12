@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script2.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/f54fd41071.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="img/logoTGK.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>ТГК</title>
+</head>
+<body>
+    <div id="index"></div>
+    <div id="modalOne">
+        <div class="modalInner">
+            <h5>Подать показания</h5>
+            <form method="post" action="/giveValue">
+                <label for="value">Данные счетчика</label>
+                <input type="number" step="0.01" min="1" max="50" value="1" id="value" name="value" required>
+                <input type="submit" value="Отправить">
+            </form>
+        </div>
+        <p>Нажмите вне модального окна, чтобы закрыть</p>
+    </div>
+    <div id="modalTwo">
+        <div class="modalInner">
+            <h5>Создать заявку на ремонт оборудования</h5>
+            <form method="post" enctype="multipart/form-data" action="/createOrder">
+                <label for="phone">Телефон: </label>
+                <input type="tel" placeholder="+7**********" pattern="^\+7\d{3}\d{7}$" maxlength="12" value="+7" id="phone" name="phone" required>
+                <label for="descr">Опишите проблему: </label>
+                <input type="text" placeholder="Не работает/сломалось/заменить.." id="descr" name="descr" required>
+                <label for="files">Прикрепите файлы: </label>
+                <input type="file" multiple="multiple" id="files" name="files">
+                <input type="submit" value="Отправить">
+            </form>
+        </div>
+        <p>Нажмите вне модального окна, чтобы закрыть</p>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="border-bottom: 1px solid #E1E1E1;">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <img src="img/logoTGK2.png" width="101px" height="100px" alt="logo">
+            </a>
+            <p id="phonenumber">+7(905)-325-62-50 <br> <a href="mailto:tgk.ooo@mail.ru" style="color: #17A2B8;font-size: 24px; ">tgk.ooo@mail.ru</a></p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expended="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto nav-icon">
+                    <li class="nav-item active">
+                        <a href="index.html" class="nav-link"><i class="fa fa-home"></i>Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link"><i class="fa fa-info"
+                                                             style="padding-right: 14px; padding-left: 6px;"></i>О компании</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link"><i class="fa fa-server"></i>Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacts.html" class="nav-link"><i class="fa fa-map-marker"></i>Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link"><i class="fa"></i>Выход</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" id="regFormOuter" style="margin: 0px; padding: 0px;">
+
+        <h3 style="margin: 30px 0 30px 0;">Личный кабинет</h3>
+        <p th:text="${result}"></p>
+
+        <p th:text="${welcomeActivate}"></p>
+
+        <div th:if="${welcomeActivate}==null">
+            <div id="commonBlock">
+                <div id="lCommonBlock">
+                    <div class="bCommonBlock">
+                        <h5>Личная информация</h5>
+                        <img src="img/profile.png">
+                        <ul>
+                            <li th:text="${'Email: ' + u.email}"></li>
+                            <li th:text="${'Фамилия: ' + u.surname}"></li>
+                            <li th:text="${'Имя: ' + u.name}"></li>
+                            <li th:text="${'Отчество: ' + u.patronymic}"></li>
+                            <li th:text="${'День рождения: ' + u.birthday}"></li>
+                            <li th:text="${u.role} ? ''"></li>
+                            <li sec:authorize="hasRole('ROLE_USER')">Роль: Пользователь</li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')">Роль: Администратор</li>
+                        </ul>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_USER')" class="bCommonBlock customBtn" id="modalBtnOne">
+                        <h6>Подать показания</h6>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_USER')" class="bCommonBlock customBtn" id="modalBtnTwo">
+                        <h6>Оставить заявку на ремонт</h6>
+                    </div>
+                </div>
+                <div id="rCommonBlock">
+                    <div sec:authorize="hasRole('ROLE_USER')" class="aCommonBlock">
+                        <h5>График ежемесячного отчёта потребления горячей воды</h5>
+                        <div>
+                            <canvas id="myChart" width="600" height="250"></canvas>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_USER')" class="aCommonBlock">
+                        <h5>Таблица прошлых переданных показателей счётчиков</h5>
+                        <div style="max-height: 300px;overflow: auto;">
+                            <table>
+                                <tr>
+                                    <th>Дата подачи</th>
+                                    <th>Кол-во воды (m^3)</th>
+                                    <th>Стоимость (руб)</th>
+                                </tr>
+                                <tr th:each="bill: ${u.bills}">
+                                    <td th:text="${bill.supplyDate.getDate() + '.' + (bill.supplyDate.getMonth()+1) + '.' + (bill.supplyDate.getYear()+1900)}" />
+                                    <td th:text="${bill.value}" />
+                                    <td th:text="${bill.value * 144.62}" />
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" class="aCommonBlock">
+                        <h5>Заявки на ремонт оборудования</h5>
+                        <div style="max-height: 300px;overflow: auto;">
+                            <table>
+                                <tr>
+                                    <th>Фамилия</th>
+                                    <th>Имя</th>
+                                    <th>Телефон</th>
+                                    <th>Описание</th>
+                                    <th>Файлы</th>
+                                    <th>Статус</th>
+                                </tr>
+                                <tr th:each="o: ${orders}">
+                                    <td th:text="${o.surname}" />
+                                    <td th:text="${o.name}" />
+                                    <td th:text="${o.phone}" />
+                                    <td th:text="${o.reason}" />
+                                    <td>
+                                        <a th:each="f: ${o.files}" th:href="${f.url}">Скачать</a>
+                                    </td>
+                                    <td>
+                                        <a class="changeStatus" th:href="${'/setStatus?id='+o.id}" th:text="${o.status} ? 'Выполнено' : 'Не выполнено'" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer font-small unique-color-dark pt-0">
+        <div class="info-color">
+            <div class="container">
+                <div class="row py-4 d-flex align-items-center">
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0 white-text">ООО "ТГК" Адрес: 410004, г. Саратов, ул. 2 Садовая, д. 9Б, литер
+                            В, оф. 4.</h6>
+                    </div>
+                    <div class="col-md-6 col-lg-7 text-center text-md-right icon-footer-font">
+                        <a href="mailto:tgk.ooo@mail.ru" class="fb-ic ml-0">
+                            <i class="fa fa-at white-text mr-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="top"><i class="fa fa-chevron-up"></i></button>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    let checkChart = document.getElementById('myChart');
+        if (checkChart != null) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                let refreshData = xhr.response.replace("[","").replace("]","").split(',').map(function(item) {
+                    return parseFloat(item);
+                });
+
+                //alert(refreshData);
+
+                const labels = [
+                'Январь',
+                'Февраль',
+                'Март',
+                'Апрель',
+                'Май',
+                'Июнь',
+                'Июль',
+                'Август',
+                'Сентябрь',
+                'Октябрь',
+                'Ноябрь',
+                'Декабрь'
+                ];
+
+                const data = {
+                labels: labels,
+                datasets: [{
+                  label: 'Показания',
+                  backgroundColor: 'rgb(255, 99, 132)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: refreshData,
+                }]
+                };
+
+                const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Кол-во потр. горячей воды m^3',
+                            },
+                        }
+                    }
+                }
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+            }
+        }
+        xhr.open('GET', '/getMyValues', true);
+        xhr.send(null);
+
+        let modalOne = document.getElementById('modalOne');
+        let modalTwo = document.getElementById('modalTwo');
+
+        modalBtnOne.addEventListener("click", function() {
+            modalOne.style.display = "flex";
+        });
+
+        modalBtnTwo.addEventListener("click", function() {
+            modalTwo.style.display = "flex";
+        });
+
+        modalOne.addEventListener("click", event => {
+            if (event.target.id == "modalOne") {
+                modalOne.style.display = "none";
+            }
+        });
+
+        modalTwo.addEventListener("click", event => {
+            if (event.target.id == "modalTwo") {
+                modalTwo.style.display = "none";
+            }
+        });
+        }
+    </script>
+</body>
+</html>

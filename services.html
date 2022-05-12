@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script2.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/f54fd41071.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="img/logoTGK.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>ТГК</title>
+</head>
+<body>
+<div id="index"></div>
+<nav class="navbar navbar-expand-lg navbar-light" style="border-bottom: 1px solid #E1E1E1;">
+    <div class="container">
+        <a href="/" class="navbar-brand">
+            <img src="img/logoTGK2.png" width="101px" height="100px" alt="logo">
+        </a>
+        <p id="phonenumber">+7(905)-325-62-50 <br> <a href="mailto:tgk.ooo@mail.ru"
+                                                      style="color: #17A2B8;font-size: 24px; ">tgk.ooo@mail.ru</a></p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expended="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto nav-icon">
+                <li class="nav-item active">
+                    <a href="index.html" class="nav-link"><i class="fa fa-home"></i>Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link"><i class="fa fa-info" style="padding-right: 14px; padding-left: 6px;"></i>О компании</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link"><i class="fa fa-server"></i>Услуги</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contacts.html" class="nav-link"><i class="fa fa-map-marker"></i>Контакты</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                    <a href="login.html" class="nav-link"><i class="fa"></i>Вход</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                    <a href="reg.html" class="nav-link"><i class="fa"></i>Регистрация</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a href="lk.html" class="nav-link"><i class="fa fa-home"></i>ЛК</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid" style="background-color: #17A2B8;padding-top: 27px ;padding-bottom: 27px;">
+    <div class="container">
+        <div class="contact-area">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 text-center justify-content-center" style="margin: 15px 0;">
+                    <div class="contact-icon">
+                        <i class="fa fa fa-phone fa-rotate-90" style="font-size: 35px;"></i>
+                    </div>
+                    <div class="media-body">
+                        <h6>Наш телефон</h6>
+                        <h5 style="color: white;">+7(905)-325-62-50</h5>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center justify-content-center" style="margin: 15px 0;">
+                    <div class="contact-icon">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <div class="media-body">
+                        <h6>Наша почта</h6>
+                        <h5><a href="mailto:tgk.ooo@mail.ru" style="color: white;">tgk.ooo@mail.ru</a></h5>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center justify-content-center" style="margin: 15px 0;">
+                    <div class="contact-icon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="media-body">
+                        <h6>Мы работаем</h6>
+                        <h5 style="color: white;">Пн - Пт 08.00 - 17.00</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="background-color: #17A2B8; padding-top: 50px; padding-bottom: 35px;">
+    <div class="container">
+        <h1 style="color: #fff; font-size: 50px;">Услуги</h1>
+    </div>
+</div>
+
+
+<div class="container-fluid" style="margin: 100px auto 50px auto;">
+    <div class="container style-text">
+        <p>Экспертиза промышленной безопасности — это специальная процедура, проводимая компетентными и уполномоченными
+            специалистами с целью определения соответствия объекта и его документации действующим требованиям
+            безопасности.</p>
+        <p>Наша компания оказывает услуги по экспертной оценке промышленных объектов разных категорий в Саратове,
+            оказывает консультационную поддержку, помогает с регистрацией в Ростехнадзоре.</p>
+        <p>Эксперты ТГК выезжают на объект заказчика, где проводят необходимые мероприятия по оценке предприятия,
+            составляют официальное заключение, которое впоследствии направляется в Ростехнадзор. Без разрешения данной
+            инстанции работа предприятия считается незаконной.</p>
+        <p>Проводить экспертизу промышленной безопасности необходимо по установленным требованиям с указанной
+            периодичностью. Сроки действия экспертной оценки определяются законодательно. Есть и случаи, когда
+            экспертизу необходимо проводить внепланово: аварии, ремонт, модернизация производства, изменение структуры
+            объекта, слияние с другими компаниями.</p>
+        <p>Процедура оценки включает изучение документов, техники, сооружений и зданий. В зависимости от каждого
+            конкретного случая экспертиза может проводиться полностью или отдельно для оборудования, техники,
+            документов.</p>
+        <p>Если вам необходима грамотная и быстрая экспертиза, обращайтесь в компанию ТГК в Саратове!</p>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row text-style2">
+        <div class="col-md-4 col-sm-6" style=" margin-top: 25px; margin-bottom: 25px;">
+            <a class="card"
+               title="Экспертиза промышленной безопасности ТУ и ЗС"
+               style="background: url(img/photo18.jpg) center center ;background-size: cover; padding: 10px;">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span>
+                            Экспертиза промышленной безопасности ТУ и ЗС                               
+                        </span>
+                    </h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-6" style=" margin-top: 25px; margin-bottom: 25px;">
+            <a class="card"
+               title="Экспертиза промышленной безопасности ТУ и ЗС"
+               style="background: url(img/photo20.jpg) center center ;background-size: cover; padding: 10px; height: 100%;">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span>
+                              Обследование зданий и сооружений                           
+                        </span>
+                    </h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-6" style=" margin-top: 25px; margin-bottom: 25px;">
+            <a class="card"
+               title="Экспертиза промышленной безопасности ТУ и ЗС"
+               style="background: url(img/photo22.jpg) center center ;background-size: cover; padding-top: 10px; padding-bottom: 40px">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span>
+                              Пуско-наладка оборудования                              
+                        </span>
+                    </h4>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row text-style2 justify-content-center">
+        <div class="col-md-4 col-sm-6" style=" margin-top: 25px; margin-bottom: 25px;">
+            <a class="card"
+               title="Экспертиза промышленной безопасности ТУ и ЗС"
+               style="background: url(img/photo21.jpg) center center ;background-size: cover; padding-top: 10px; padding-bottom: 19px">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span>
+                              Техническое обслуживание и ремонт оборудования                               
+                        </span>
+                    </h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-6" style=" margin-top: 25px; margin-bottom: 25px;">
+            <a class="card"
+               title="Экспертиза промышленной безопасности ТУ и ЗС"
+               style="background: url(img/photo19.jpg) center center ;background-size: cover; height: 100%;">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span>
+                              Техническое диагностирование и неразрушающий контроль                              
+                        </span>
+                    </h4>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<footer class="page-footer font-small unique-color-dark pt-0">
+    <div class="info-color">
+        <div class="container">
+            <div class="row py-4 d-flex align-items-center">
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0 white-text">ООО "ТГК" Адрес: 410004, г. Саратов, ул. 2 Садовая, д. 9Б, литер В, оф.
+                        4.</h6>
+                </div>
+                <div class="col-md-6 col-lg-7 text-center text-md-right icon-footer-font">
+                    <a href="mailto:tgk.ooo@mail.ru" class="fb-ic ml-0">
+                        <i class="fa fa-at white-text mr-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<button id="top"><i class="fa fa-chevron-up"></i></button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true"
+     data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="model-title" id="exampleModalLabel">Оставить заявку</h5>
+                <button class="close turn" type="button" data-dismiss="modal" aria-label="Close">
+                    <span class="fs-35" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="js/script.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
