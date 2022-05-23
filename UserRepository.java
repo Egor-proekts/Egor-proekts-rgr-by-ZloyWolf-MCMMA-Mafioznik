@@ -1,0 +1,14 @@
+package org.prod.tgk.repositories;
+
+import org.prod.tgk.entitys.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByActivationCode(String activationCode);
+    Optional<UserDetails> findByEmail(String email);
+}
